@@ -4,3 +4,6 @@ venvBase
 venvUp
 oc-lettings-site
 settings.json
+coverage_html/
+.coverage
+.coveragerc

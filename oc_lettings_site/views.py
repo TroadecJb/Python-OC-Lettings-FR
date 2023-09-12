@@ -5,4 +5,7 @@ from django.shortcuts import render
 # vitae dapibus nisi lorem dapibus sem. Maecenas pharetra purus ipsum, eget consequat ipsum lobortis quis. Phasellus eleifend ex auctor venenatis tempus.# noqa: E501
 # Aliquam vitae erat ac orci placerat luctus. Nullam elementum urna nisi, pellentesque iaculis enim cursus in. Praesent volutpat porttitor magna, non finibus neque cursus id.# noqa: E501
 def index(request):
+    """
+    Render index. Default homepage.
+    """
     return render(request, "index.html")

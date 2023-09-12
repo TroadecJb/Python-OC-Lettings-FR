@@ -5,6 +5,11 @@ from .models import Letting
 # Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis velit. Sed non placerat massa. Integer est nunc, pulvinar a# noqa: E501
 # tempor et, bibendum id arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras eget scelerisque# noqa: E501
 def index(request):
+    """
+    Render index page for lettings.
+
+    Listing every Letting objects.
+    """
     lettings_list = Letting.objects.all()
     context = {"lettings_list": lettings_list}
     return render(request, "lettings/index.html", context)
@@ -14,7 +19,24 @@ def index(request):
 #  lacus justo nec purus. Aenean finibus faucibus lectus at porta. Maecenas auctor, est ut luctus congue, dui enim mattis enim, ac condimentum velit libero in magna. Suspendisse potenti. In tempus a nisi sed laoreet.# noqa: E501
 # Suspendisse porta dui eget sem accumsan interdum. Ut quis urna pellentesque justo mattis ullamcorper ac non tellus. In tristique mauris eu velit fermentum, tempus pharetra est luctus. Vivamus consequat aliquam libero, eget bibendum lorem. Sed non dolor risus. Mauris condimentum auctor elementum. Donec quis nisi ligula. Integer vehicula tincidunt enim, ac lacinia augue pulvinar sit amet.# noqa: E501
 def letting(request, letting_id):
-    letting = Letting.objects.get(id=letting_id)
+    """
+    Render index page for lettings.
+
+    Listing every Letting objects.
+    ---
+    lettings_id:
+        pk from table lettings_letting
+    """
+    try:
+        letting = Letting.objects.get(id=letting_id)
+    except Letting.DoesNotExist:
+        return render(
+            request,
+            "404.html",
+            context={"message": "Letting not found"},
+            status=404,
+        )
+
     context = {
         "title": letting.title,
         "address": letting.address,
