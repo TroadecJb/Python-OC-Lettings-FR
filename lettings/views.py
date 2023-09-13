@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Letting
+from sentry_sdk import capture_exception
 
 
 # Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis velit. Sed non placerat massa. Integer est nunc, pulvinar a# noqa: E501
@@ -29,14 +30,14 @@ def letting(request, letting_id):
     """
     try:
         letting = Letting.objects.get(id=letting_id)
-    except Letting.DoesNotExist:
+    except Letting.DoesNotExist as err:
+        capture_exception(err)
         return render(
             request,
-            "404.html",
+            "500.html",
             context={"message": "Letting not found"},
-            status=404,
+            status=500,
         )
-
     context = {
         "title": letting.title,
         "address": letting.address,

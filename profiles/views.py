@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Profile
+from sentry_sdk import capture_exception
 
 
 # Sed placerat quam in pulvinar commodo. Nullam laoreet consectetur ex, sed consequat libero pulvinar eget. Fusc # noqa: E501
@@ -29,12 +30,13 @@ def profile(request, username):
     """
     try:
         profile = Profile.objects.get(user__username=username)
-    except Profile.DoesNotExist:
+    except Profile.DoesNotExist as err:
+        capture_exception(err)
         return render(
             request,
-            "404.html",
-            context={"message": "Profile does not exist."},
-            status=404,
+            "500.html",
+            context={"message": "Profile not found"},
+            status=500,
         )
     context = {"profile": profile}
     return render(request, "profiles/profile.html", context)
