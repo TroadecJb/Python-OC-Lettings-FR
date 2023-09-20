@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import logging
-from sentry_sdk import capture_exception, capture_message
+from sentry_sdk import capture_exception
 
 
 logger = logging.getLogger(__name__)
