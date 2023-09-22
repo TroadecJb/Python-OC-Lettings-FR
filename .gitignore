@@ -1,7 +1,6 @@
 **/__pycache__
 *.pyc
-venvBase
-venvUp
+venv
 oc-lettings-site
 settings.json
 coverage_html/
