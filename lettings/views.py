@@ -7,9 +7,16 @@ from sentry_sdk import capture_exception
 # tempor et, bibendum id arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Cras eget scelerisque# noqa: E501
 def index(request):
     """
-    Render index page for lettings.
+    Display list of lettings :model:`lettings.Letting`.
 
-    Listing every Letting objects.
+    **Context**
+
+    ``lettings_list``
+        list of instance :model:`lettings.Letting`.
+
+    **Template**
+
+    :template:`lettings/index.html`
     """
     lettings_list = Letting.objects.all()
     context = {"lettings_list": lettings_list}
@@ -21,12 +28,22 @@ def index(request):
 # Suspendisse porta dui eget sem accumsan interdum. Ut quis urna pellentesque justo mattis ullamcorper ac non tellus. In tristique mauris eu velit fermentum, tempus pharetra est luctus. Vivamus consequat aliquam libero, eget bibendum lorem. Sed non dolor risus. Mauris condimentum auctor elementum. Donec quis nisi ligula. Integer vehicula tincidunt enim, ac lacinia augue pulvinar sit amet.# noqa: E501
 def letting(request, letting_id):
     """
-    Render index page for lettings.
+    Display an individual letting :model:`lettings.Letting`.
 
-    Listing every Letting objects.
     ---
     lettings_id:
         pk from table lettings_letting
+    ---
+
+    **Context**
+
+    ``letting``
+        title :model:`lettings.Letting.title`.
+        address :model:`lettings.Letting.address`.
+
+    **Template**
+
+    :template:`lettings/letting.html`
     """
     try:
         letting = Letting.objects.get(id=letting_id)

@@ -7,9 +7,16 @@ from sentry_sdk import capture_exception
 # faucibus, urna quis auctor pharetra, massa dolor cursus neque, quis dictum lacus d# noqa: E501
 def index(request):
     """
-    Render index page for profiles.
+    Display list of profiles :model:`profiles.Profile`.
 
-    Listing every Profile objects.
+    **Context**
+
+    ``profiles_list``
+        list of instance :model:`profiles.Profile`.
+
+    **Template**
+
+    :template:`profiles/index.html`
     """
     profiles_list = Profile.objects.all()
     context = {"profiles_list": profiles_list}
@@ -21,12 +28,21 @@ def index(request):
 # it. Nam aliquam dignissim congue. Pellentesque habitant morbi tristique senectus et netus et males# noqa: E501
 def profile(request, username):
     """
-    Render index page for profiles.
+    Display an individual profile :model:`profiles.Profile`.
 
-    Listing every Profile objects.
     ---
     username:
-        username attribute of user from table profiles_profile
+        username from table profiles_profile
+    ---
+
+    **Context**
+
+    ``profile``
+        instance of :model:`profiles.Profile`.
+
+    **Template**
+
+    :template:`profiles/profile.html`
     """
     try:
         profile = Profile.objects.get(user__username=username)

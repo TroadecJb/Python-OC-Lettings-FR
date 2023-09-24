@@ -3,9 +3,6 @@ import logging
 from sentry_sdk import capture_exception
 
 
-logger = logging.getLogger(__name__)
-
-
 # Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie quam lobortis leo consectetur ullamcorper non id est. Praesent dictum, nulla eget feugiat sagittis, sem mi convallis eros,# noqa: E501
 # vitae dapibus nisi lorem dapibus sem. Maecenas pharetra purus ipsum, eget consequat ipsum lobortis quis. Phasellus eleifend ex auctor venenatis tempus.# noqa: E501
 # Aliquam vitae erat ac orci placerat luctus. Nullam elementum urna nisi, pellentesque iaculis enim cursus in. Praesent volutpat porttitor magna, non finibus neque cursus id.# noqa: E501
@@ -24,9 +21,3 @@ def error_404(request, exception):
     """
     capture_exception(exception)
     return render(request, "404.html", status=404)
-
-
-# def error_500(request, template_name="500.html"):
-#     capture_message(request.path, level="error")
-#     data = {"message": "What you were looking for does not exist."}
-#     return render(request, template_name, data, status=500)
