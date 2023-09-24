@@ -1,8 +1,10 @@
 **/__pycache__
 *.pyc
 venv
+ENV
 oc-lettings-site
 settings.json
 coverage_html/
 .coverage
 .coveragerc
+.env
