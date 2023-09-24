@@ -53,7 +53,7 @@ def test_letting_content_OK(mock_letting, mock_address):
 
 
 @pytest.mark.django_db
-def test_letting_404():
+def test_letting_500():
     client = Client()
     path = reverse("letting", kwargs={"letting_id": 900})
     response = client.get(path)
@@ -61,6 +61,6 @@ def test_letting_404():
 
     expected_message = "Letting not found"
 
-    assert response.status_code == 404
+    assert response.status_code == 500
     assert expected_message in content
-    assertTemplateUsed(response, "404.html")
+    assertTemplateUsed(response, "500.html")

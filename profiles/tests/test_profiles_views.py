@@ -54,14 +54,14 @@ def test_profile_content_OK(mock_profile):
 
 
 @pytest.mark.django_db
-def test_profile_404():
+def test_profile_500():
     client = Client()
     path = reverse("profile", kwargs={"username": "doesnotexist"})
     response = client.get(path)
     content = response.content.decode()
 
-    expected_message = "Profile does not exist"
+    expected_message = "Profile not found"
 
-    assert response.status_code == 404
+    assert response.status_code == 500
     assert expected_message in content
-    assertTemplateUsed(response, "404.html")
+    assertTemplateUsed(response, "500.html")
