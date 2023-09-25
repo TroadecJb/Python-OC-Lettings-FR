@@ -52,12 +52,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: linting preparation
+          name: linting
           command: |
             pip install -r requirements.txt
-      - run:
-          name: Linting
-          command: $HOME/ ./local/bin/flake8
+            flake8
 
 
 
