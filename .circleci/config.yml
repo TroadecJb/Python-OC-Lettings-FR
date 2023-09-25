@@ -5,14 +5,16 @@ jobs:
   # Job one with a unique name
   build:
     docker:
-     - image: cimg/base:2022.05
+      - image: python:3.11.5-alpine3.18
     steps:
-      - run: echo "Say hello to YAML!"
+      - checkout
+      - run: pip install -r requirements.txt
   # Job two with a unique name
   test:
     docker:
-     - image: cimg/base:2022.05
+      - image: python:3.11.5-alpine3.18
     steps:
+      - checkout
       - run: pytest
 
 workflows:
