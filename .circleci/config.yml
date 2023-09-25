@@ -6,6 +6,8 @@ jobs:
   build:
     docker:
       - image: cimg/python:3.11.5
+
+    working_directory: /tmp
     steps:
       - checkout
       - run: python --version
@@ -24,10 +26,10 @@ jobs:
           name: Test start
           command: pytest --junitxml=test-results/junit.xml
       - store_artifacts:
-          path: test-reports/
+          path: /tmp/test-reports
           destination: python_app
       - store_test_results:
-          path: test-results
+          path: /tmp/test-results
   
   coverage:
     docker:
@@ -42,7 +44,8 @@ jobs:
             coverage report
             coverage html
       - store_artifacts:
-          path: htmlcov
+          path: /tmp/htmlcov
+          destination: html-coverage
 
   linting:
     docker:
