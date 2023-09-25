@@ -53,9 +53,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Linting
+          name: coverage preparation
           command: |
             pip install -r requirements.txt
+            mkdir test-linting
+      - run:
+          name: Linting
+          command: |
             flake8
       - store_artifacts:
           path: linting
