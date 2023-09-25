@@ -37,7 +37,6 @@ jobs:
           name: coverage preparation
           command: |
             pip install -r requirements.txt
-            echo $HOME
       - run:
           name: run coverage
           command: |
@@ -53,16 +52,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: coverage preparation
+          name: linting preparation
           command: |
             pip install -r requirements.txt
-            mkdir test-linting
       - run:
           name: Linting
           command: |
             flake8
-      - store_artifacts:
-          path: linting
 
 
 
