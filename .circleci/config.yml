@@ -41,9 +41,9 @@ jobs:
       - run:
           name: run coverage
           command: |
-            $HOME/ ./local/bin/coverage run -m pytest
-            $HOME/ ./local/bin/coverage report
-            $HOME/ ./local/bin/coverage html
+            coverage run -m pytest
+            coverage report
+            coverage html
       - store_artifacts:
           path: htmlcov
 
@@ -56,7 +56,7 @@ jobs:
           name: Linting
           command: |
             pip install -r requirements.txt
-            $HOME/ ./local/bin/flake8
+            flake8
       - store_artifacts:
           path: linting
 
