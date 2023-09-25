@@ -9,10 +9,23 @@ jobs:
     steps:
       - checkout
       - run: python --version
-      # - run: 
-      #     name: Build Docker image
-      #     command: docker build --tag oc-lettings
 
+  test:
+    docker:
+      - image: cimg/python:3.11.5
+    steps:
+      - checkout
+      - run:
+          name: Test preparation
+          command: |
+            pip install -r requirements.txt
+            mkdir test-results
+      - run:
+          name: Test start
+          command: pytest --junitxml=test-results/junit.xml
+      - store_test_results:
+          path: test-results
+  
 
 
   # # Job two with a unique name
@@ -28,3 +41,4 @@ workflows:
     # List of jobs that will run
     jobs:
       - build
+      - test
