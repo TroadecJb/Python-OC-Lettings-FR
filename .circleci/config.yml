@@ -26,6 +26,34 @@ jobs:
       - store_test_results:
           path: test-results
   
+  coverage:
+    docker:
+      - image: cimg/python:3.11.5
+    steps:
+      - checkout
+      - run:
+          name: Coverage
+          command: |
+            pip install -r requirements.txt
+            coverage run -m pytest
+            coverage report
+            coverage html
+      - store_artifacts:
+          path: htmlcov
+
+  linting:
+    docker:
+      - image: cimg/python:3.11.5
+    steps:
+      - checkout
+      - run:
+          name: Linting
+          command: |
+            pip install -r requirements.txt
+            flake8
+      - store_artifacts:
+          path: linting
+
 
 
   # # Job two with a unique name
@@ -42,3 +70,5 @@ workflows:
     jobs:
       - build
       - test
+      - coverage
+      - linting

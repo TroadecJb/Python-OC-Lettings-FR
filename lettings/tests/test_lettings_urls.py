@@ -46,6 +46,6 @@ def test_letting_url_NOT_FOUND():
     client = Client()
     path = reverse("letting", kwargs={"letting_id": 900})
     response = client.get(path)
-    assert path == f"/lettings/900/"
+    assert path == "/lettings/900/"
     assert response.status_code == 500
     assert resolve(path).view_name == "letting"

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import logging
 from sentry_sdk import capture_exception
 
 

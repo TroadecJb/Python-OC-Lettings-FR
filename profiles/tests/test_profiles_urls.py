@@ -47,7 +47,7 @@ def test_profile_url_TYPO_ERROR(mock_profile):
 @pytest.mark.django_db
 def test_profile_url_NOT_FOUND():
     client = Client()
-    response = client.get(f"profile/doesnotexist")
+    response = client.get("profile/doesnotexist")
 
     assert response.status_code == 404
     assertTemplateUsed(response, "404.html")
