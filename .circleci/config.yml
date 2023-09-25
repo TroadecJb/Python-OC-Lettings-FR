@@ -5,22 +5,26 @@ jobs:
   # Job one with a unique name
   build:
     docker:
-      - image: python:3.11.5-alpine3.18
+      - image: cimg/python:3.11.5
     steps:
       - checkout
-      - run: pip install -r requirements.txt
-  # Job two with a unique name
-  test:
-    docker:
-      - image: python:3.11.5-alpine3.18
-    steps:
-      - checkout
-      - run: pip install pytest --user && pytest
+      - run: python --version
+      # - run: 
+      #     name: Build Docker image
+      #     command: docker build --tag oc-lettings
+
+
+
+  # # Job two with a unique name
+  # test:
+  #   docker:
+  #     - image: cimg/python:3.11.5
+  #   steps:
+  #     - checkout
 
 workflows:
-  # Name of workflow
+# Name of workflow
   build_and_test:
     # List of jobs that will run
     jobs:
       - build
-      - test
