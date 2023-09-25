@@ -7,7 +7,6 @@ jobs:
     docker:
       - image: cimg/python:3.11.5
 
-    working_directory: ~/tmp
     steps:
       - checkout
       - run: python --version
@@ -21,15 +20,12 @@ jobs:
           name: Test preparation
           command: |
             pip install -r requirements.txt
-            mkdir test-results
+            echo $HOME
       - run:
           name: Test start
           command: pytest --junitxml=test-results/junit.xml
       - store_artifacts:
-          path: /tmp/test-reports
-          destination: python_app
-      - store_test_results:
-          path: /tmp/test-results
+          path: test-reports
   
   coverage:
     docker:
@@ -40,12 +36,11 @@ jobs:
           name: Coverage
           command: |
             pip install -r requirements.txt
-            coverage run -m pytest
-            coverage report
-            coverage html
+            $HOME/ ./local/bin/coverage run -m pytest
+            $HOME/ ./local/bin/coverage report
+            $HOME/ ./local/bin/coverage html
       - store_artifacts:
-          path: /tmp/htmlcov
-          destination: html-coverage
+          path: htmlcov
 
   linting:
     docker:
@@ -56,7 +51,7 @@ jobs:
           name: Linting
           command: |
             pip install -r requirements.txt
-            flake8
+            $HOME/ ./local/bin/flake8
       - store_artifacts:
           path: linting
 
