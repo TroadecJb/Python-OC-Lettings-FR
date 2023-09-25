@@ -57,8 +57,7 @@ jobs:
             pip install -r requirements.txt
       - run:
           name: Linting
-          command: |
-            flake8
+          command: $HOME/ ./local/bin/flake8
 
 
 
