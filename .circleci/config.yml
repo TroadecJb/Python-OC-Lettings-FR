@@ -59,16 +59,11 @@ jobs:
 
 
 
-  # # Job two with a unique name
-  # test:
-  #   docker:
-  #     - image: cimg/python:3.11.5
-  #   steps:
-  #     - checkout
+
 
 workflows:
 # Name of workflow
-  build_and_test:
+  build_and_tests:
     # List of jobs that will run
     jobs:
       - build
