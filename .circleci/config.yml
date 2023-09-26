@@ -85,7 +85,6 @@ workflows:
             - build
             - test
             - coverage
-            - linting
           filters:
             branches:
               only: master
