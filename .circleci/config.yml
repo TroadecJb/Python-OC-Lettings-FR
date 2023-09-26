@@ -27,6 +27,8 @@ jobs:
             pytest --junitxml=test-results/junit.xml
       - store_artifacts:
           path: test-results
+      - store_test_results:
+          path: terst-results
   
   coverage:
     docker:
