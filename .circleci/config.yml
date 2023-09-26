@@ -59,7 +59,15 @@ jobs:
             pip install -r requirements.txt
             flake8
 
-
+  deploy:
+    docker:
+      - image: cimg/python:3.11.5
+    steps:
+      - checkout
+      - run:
+          name: Deploy main to heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 
 
@@ -72,3 +80,12 @@ workflows:
       - test
       - coverage
       - linting
+      - deploy:
+          requires:
+            - build
+            - test
+            - coverage
+            - linting
+          filters:
+            branches:
+              only: master
