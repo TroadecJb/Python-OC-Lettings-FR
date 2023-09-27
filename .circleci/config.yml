@@ -1,15 +1,53 @@
 # CircleCI configuration file
 version: 2.1
 
-jobs:
-  # Job one with a unique name
-  build:
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_TAG: troadecjb/jbt-oc-lettings:latest
     docker:
       - image: cimg/python:3.11.5
 
+jobs:
+  # Job one with a unique name
+  build:
+    executor: docker-publisher
+    # docker:
+    #   - image: cimg/python:3.11.5
+
     steps:
       - checkout
-      - run: python --version
+      # - run: python --version
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build --tag "${IMAGE_TAG}" .
+
+      - run:
+          name: Archive Docker image
+          command: docker save --output image.tar "${IMAGE_TAG}"
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
+
+  push:
+    executor: docker-publisher
+
+    steps:
+      - setup_remote_docker
+
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Load Docker image
+          command: docker load --input /tmp/workspace/image.tar
+
+      - run:
+          name: Publish Docker image
+          command: |
+            echo "${DOCKERHUB_PASS}" | docker login --username "${DOCKERHUB_USERNAME}" --password-stdin
+            docker push "${IMAGE_TAG}"
 
   test:
     docker:
@@ -80,6 +118,14 @@ workflows:
       - test
       - coverage
       - linting
+      - push:
+          requires:
+            - build
+            - test
+            - coverage
+            filters:
+              branches:
+                only: master
       - deploy:
           requires:
             - build
