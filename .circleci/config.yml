@@ -123,14 +123,14 @@ workflows:
             - build
             - test
             - coverage
-            filters:
-              branches:
-                only: master
+          filters:
+            branches:
+              only: master
       - deploy:
           requires:
             - build
             - test
             - coverage
-            filters:
-              branches:
-                only: master
+          filters:
+            branches:
+              only: master
