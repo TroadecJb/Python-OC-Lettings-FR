@@ -1,7 +1,7 @@
-# version: "2"
-# python:
-#   install:
-#     - requirements: requirements.txt
+version: "2"
+python:
+  install:
+    - requirements: requirements.txt
 
 sphinx:
   configuration: docs/source/conf.py
