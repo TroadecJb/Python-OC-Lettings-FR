@@ -10,6 +10,6 @@ python:
     - requirements: requirements.txt
 
 sphinx:
-  configuration: ./docs/source/conf.py
+  configuration: /home/docs/checkouts/readthedocs.org/user_builds/oc-lettings-fr/checkouts/latest/docs/source/conf.py 
 
 formats: all
