@@ -30,10 +30,10 @@ def letting(request, letting_id):
     """
     Display an individual letting :model:`lettings.Letting`.
 
-    ---
+    **Args**
     lettings_id:
         pk from table lettings_letting
-    ---
+    
 
     **Context**
 

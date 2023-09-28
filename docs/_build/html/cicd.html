@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>CI/CD Pipeline &#8212; OC-Lettings 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=51b770b3"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="build" href="modules.html" />
+    <link rel="prev" title="Requirements" href="requirements.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ci-cd-pipeline">
+<h1>CI/CD Pipeline<a class="headerlink" href="#ci-cd-pipeline" title="Link to this heading">¶</a></h1>
+<div class="line-block">
+<div class="line">The CI/CD pipeline is a series of steps to make the application available for the users.</div>
+<div class="line">In this case the CI/CD pipeline uses CircleCI.</div>
+</div>
+<p>The pipeline starts when a change is made on the Git repository.</p>
+<p>The pipeline:</p>
+<ol class="arabic simple">
+<li><p><strong>Build</strong> The application is compiled, using environment variables stored in CircleCI environment variables (SENTRY_DSN, SECRET_KEY, DOCKERHUB_API, DOCKERHUB_REPO, DOCKERHUB_USERNAME, HEROKU_TOKEN, HEROKU_APPNAME).</p></li>
+<li><p><strong>Lint</strong> The codebase is checked using flake8.</p></li>
+<li><p><strong>Test</strong> Using pytest, tests check functions results, behaviour and templates used.</p></li>
+<li><p><strong>Coverage</strong> The coverage stage checks for code coverage, aiming for at least 84% of the codebase tested.</p></li>
+<li><p><strong>Push</strong> This stage build the Docker image and pushes it to Dockerhub, only its master branch, if the previous stages (Build, Test, Coverage) went successfully.</p></li>
+<li><p><strong>Deploy</strong> The last stage, where the application is deployed to Heroku, only its master branch, if the previous stages (Build, Test, Coverage) went successfully.</p></li>
+</ol>
+<p>The pipeline allows for a safer delivery of the application, using automated testing and deployment.</p>
+<section id="circleci">
+<h2>CircleCI<a class="headerlink" href="#circleci" title="Link to this heading">¶</a></h2>
+<blockquote>
+<div><dl>
+<dt>To use the pipeline, a CircleCI account is mendatory.</dt><dd><ol class="arabic">
+<li><p>Go to their official website <a class="reference external" href="https://circleci.com/">https://circleci.com/</a></p></li>
+<li><p>CLick on <code class="docutils literal notranslate"><span class="pre">Go</span> <span class="pre">to</span> <span class="pre">application</span></code></p></li>
+<li><dl>
+<dt>Create an account:</dt><dd><div class="line-block">
+<div class="line">You can either choose to create an account with your email (you will have to connect to the github repository later to access it)</div>
+<div class="line">or use your github account to directly link the repository to CircleCI.</div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+<dl class="simple">
+<dt>If you created an account with your email:</dt><dd><ol class="arabic simple">
+<li><p>Create a new project and follow the instructions to connect to a Github repository</p></li>
+</ol>
+</dd>
+<dt>If you created an account using your Github account:</dt><dd><ol class="arabic simple">
+<li><p>Create a project and select your Github repository to use</p></li>
+</ol>
+</dd>
+</dl>
+<ol class="arabic simple">
+<li><p>Go to your project settings</p></li>
+<li><p>Select the menu Environment variables</p></li>
+<li><dl class="simple">
+<dt>Add the following variables:</dt><dd><ul class="simple">
+<li><p>SECRET_KEY (same as the .env)</p></li>
+<li><p>SENTRY_DSN (same as the .env)</p></li>
+<li><p>DOCKERHUB_PASS (<a class="reference external" href="https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token">https://docs.docker.com/docker-hub/access-tokens/#create-an-access-token</a>)</p></li>
+<li><p>DOCKERHUB_REPO (the name of your image)</p></li>
+<li><p>DOCKERHUB_USERNAME (your username’s account)</p></li>
+<li><p>HEROKU_API_KEY (under API Key in your account on heroku dashboard or from cli _here: <a class="reference external" href="https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api">https://help.heroku.com/PBGP6IDE/how-should-i-generate-an-api-key-that-allows-me-to-use-the-heroku-platform-api</a> )</p></li>
+<li><p>HEROKU_APP_NAME (name under which the app will be deployed on heroku)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<p>Now after each new commit on the main branch, the pipeline will start following each steps, deploying your new version of the application.</p>
+</dd>
+<dt>To create an account on Heroku:</dt><dd><ol class="arabic simple">
+<li><p>Go to their official website <a class="reference external" href="https://www.heroku.com/">https://www.heroku.com/</a></p></li>
+<li><p>Click on Sign up</p></li>
+<li><p>Fill the form</p></li>
+<li><p>Follow the instructions</p></li>
+</ol>
+</dd>
+</dl>
+</div></blockquote>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OC-Lettings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="project_desc.html">Project description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_app.html">Installing the app</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CI/CD Pipeline</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#circleci">CircleCI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">modules</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="requirements.html" title="previous chapter">Requirements</a></li>
+      <li>Next: <a href="modules.html" title="next chapter">build</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Jean-Baptiste Troadec.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/cicd.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

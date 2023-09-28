@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Views &#8212; OC-Lettings 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script src="_static/documentation_options.js?v=51b770b3"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Models" href="models.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="views">
+<h1>Views<a class="headerlink" href="#views" title="Link to this heading">¶</a></h1>
+<section id="module-lettings.views">
+<span id="lettings"></span><h2>lettings<a class="headerlink" href="#module-lettings.views" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="lettings.views.index">
+<span class="sig-prename descclassname"><span class="pre">lettings.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lettings/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lettings.views.index" title="Link to this definition">¶</a></dt>
+<dd><p>Display list of lettings <a href="#id1"><span class="problematic" id="id2">:model:`lettings.Letting`</span></a>.</p>
+<p><strong>Context</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">lettings_list</span></code></dt><dd><p>list of instance <a href="#id3"><span class="problematic" id="id4">:model:`lettings.Letting`</span></a>.</p>
+</dd>
+</dl>
+<p><strong>Template</strong></p>
+<p><a href="#id5"><span class="problematic" id="id6">:template:`lettings/index.html`</span></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="lettings.views.letting">
+<span class="sig-prename descclassname"><span class="pre">lettings.views.</span></span><span class="sig-name descname"><span class="pre">letting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">letting_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lettings/views.html#letting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#lettings.views.letting" title="Link to this definition">¶</a></dt>
+<dd><p>Display an individual letting <a href="#id7"><span class="problematic" id="id8">:model:`lettings.Letting`</span></a>.</p>
+<p><strong>Args</strong>
+lettings_id:</p>
+<blockquote>
+<div><p>pk from table lettings_letting</p>
+</div></blockquote>
+<p><strong>Context</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">letting</span></code></dt><dd><p>title <a href="#id9"><span class="problematic" id="id10">:model:`lettings.Letting.title`</span></a>.
+address <a href="#id11"><span class="problematic" id="id12">:model:`lettings.Letting.address`</span></a>.</p>
+</dd>
+</dl>
+<p><strong>Template</strong></p>
+<p><a href="#id13"><span class="problematic" id="id14">:template:`lettings/letting.html`</span></a></p>
+</dd></dl>
+
+</section>
+<section id="module-profiles.views">
+<span id="profiles"></span><h2>profiles<a class="headerlink" href="#module-profiles.views" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="profiles.views.index">
+<span class="sig-prename descclassname"><span class="pre">profiles.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/profiles/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#profiles.views.index" title="Link to this definition">¶</a></dt>
+<dd><p>Display list of profiles <a href="#id15"><span class="problematic" id="id16">:model:`profiles.Profile`</span></a>.</p>
+<p><strong>Context</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">profiles_list</span></code></dt><dd><p>list of instance <a href="#id17"><span class="problematic" id="id18">:model:`profiles.Profile`</span></a>.</p>
+</dd>
+</dl>
+<p><strong>Template</strong></p>
+<p><a href="#id19"><span class="problematic" id="id20">:template:`profiles/index.html`</span></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="profiles.views.profile">
+<span class="sig-prename descclassname"><span class="pre">profiles.views.</span></span><span class="sig-name descname"><span class="pre">profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/profiles/views.html#profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#profiles.views.profile" title="Link to this definition">¶</a></dt>
+<dd><p>Display an individual profile <a href="#id21"><span class="problematic" id="id22">:model:`profiles.Profile`</span></a>.</p>
+<p><strong>Args</strong></p>
+<dl class="simple">
+<dt>username:</dt><dd><p>username from table profiles_profile</p>
+</dd>
+</dl>
+<p><strong>Context</strong></p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">profile</span></code></dt><dd><p>instance of <a href="#id23"><span class="problematic" id="id24">:model:`profiles.Profile`</span></a>.</p>
+</dd>
+</dl>
+<p><strong>Template</strong></p>
+<p><a href="#id25"><span class="problematic" id="id26">:template:`profiles/profile.html`</span></a></p>
+</dd></dl>
+
+</section>
+<section id="oc-lettings-site">
+<h2>oc_lettings_site<a class="headerlink" href="#oc-lettings-site" title="Link to this heading">¶</a></h2>
+<dl class="py function" id="module-oc_lettings_site.views">
+<dt class="sig sig-object py" id="oc_lettings_site.views.error_404">
+<span class="sig-prename descclassname"><span class="pre">oc_lettings_site.views.</span></span><span class="sig-name descname"><span class="pre">error_404</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exception</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/oc_lettings_site/views.html#error_404"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#oc_lettings_site.views.error_404" title="Link to this definition">¶</a></dt>
+<dd><p>Render 404.html if url path did not match.</p>
+<p>Send exception log to sentry</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="oc_lettings_site.views.index">
+<span class="sig-prename descclassname"><span class="pre">oc_lettings_site.views.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/oc_lettings_site/views.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#oc_lettings_site.views.index" title="Link to this definition">¶</a></dt>
+<dd><p>Render index. Default homepage.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">OC-Lettings</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="project_desc.html">Project description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_app.html">Installing the app</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="models.html">models</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">views</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">build</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter">Models</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Jean-Baptiste Troadec.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/views.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
