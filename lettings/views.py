@@ -33,7 +33,6 @@ def letting(request, letting_id):
     **Args**
     lettings_id:
         pk from table lettings_letting
-    
 
     **Context**
 

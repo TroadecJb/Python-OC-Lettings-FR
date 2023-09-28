@@ -31,11 +31,9 @@ def profile(request, username):
     Display an individual profile :model:`profiles.Profile`.
 
     **Args**
-    
     username:
         username from table profiles_profile
     
-
     **Context**
 
     ``profile``
