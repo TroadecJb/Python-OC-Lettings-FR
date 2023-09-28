@@ -33,7 +33,7 @@ def profile(request, username):
     **Args**
     username:
         username from table profiles_profile
-    
+
     **Context**
 
     ``profile``
