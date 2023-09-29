@@ -1,77 +1,83 @@
-## Résumé
+## Overview
 
-Site web d'Orange County Lettings
+Python-OC-Lettings-Fr is the application for Orange County Lettings.
 
-## Développement local
+This application has been modified to a modular structure. To allow access to the public, the application has a CircleCI pipeline (CI/CD) to containerize it and to deploy it on Heroku.
 
-### Prérequis
+## Quick start
 
-- Compte GitHub avec accès en lecture à ce repository
-- Git CLI
-- SQLite3 CLI
-- Interpréteur Python, version 3.6 ou supérieure
+- Clone the repository
+  - `cd /path/to/project`
+  - `git clone https://github.com/TroadecJb/Python-OC-Lettings-FR.git`
 
-Dans le reste de la documentation sur le développement local, il est supposé que la commande `python` de votre OS shell exécute l'interpréteur Python ci-dessus (à moins qu'un environnement virtuel ne soit activé).
+- Create virtual environment with dependecies
+  - `cd /path/to/project/Python-OC-Lettings-FR`
+  - `python -m venv venv`
+  - Activate the environment
+    - on windows `venv\Scripts\activate`
+    - on MacOS/Linux `source venv/bin/activate`
+  - Install dependecies necessary to run the application
+    - `pip install -r requirements.txt`
+  - To deactivate the environment
+    -`deactivate`
 
-### macOS / Linux
+- Linting
+  - `cd /path/to/Python-OC-Lettings-FR`
+  - `source venv/bin/activate`
+  - `flake8`
 
-#### Cloner le repository
+- Tests
+  - `cd /path/to/Python-OC-Lettings-FR`
+  - `source venv/bin/activate`
+  - `pytest`
 
-- `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+- Start the app
+  - `cd /path/to/project/Python-OC-Lettings-FR`
+  - Activate the environment
+  - `python manage.py runserver`
+  - From a web browser access the app with `http://localhost:8000`
 
-#### Créer l'environnement virtuel
+- Access the admin panel
+  - Go to `http://localhost:8000/admin`
+  - Connect with user `admin` and password `Abc1234!`
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `python -m venv venv`
-- `apt-get install python3-venv` (Si l'étape précédente comporte des erreurs avec un paquet non trouvé sur Ubuntu)
-- Activer l'environnement `source venv/bin/activate`
-- Confirmer que la commande `python` exécute l'interpréteur Python dans l'environnement virtuel
-`which python`
-- Confirmer que la version de l'interpréteur Python est la version 3.6 ou supérieure `python --version`
-- Confirmer que la commande `pip` exécute l'exécutable pip dans l'environnement virtuel, `which pip`
-- Pour désactiver l'environnement, `deactivate`
+## Requirements
 
-#### Exécuter le site
+Django==4.2.5  
+coverage==7.3.1  
+flake8==6.1.0  
+gunicorn==21.2.0  
+pytest-django==4.5.2  
+sentry-sdk==1.31.0  
+whitenoise==6.5.0  
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pip install --requirement requirements.txt`
-- `python manage.py runserver`
-- Aller sur `http://localhost:8000` dans un navigateur.
-- Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
+Sentry needs [sqlalchemy extra](https://docs.sentry.io/platforms/python/configuration/integrations/sqlalchemy/)
 
-#### Linting
+See `requirements.txt` for more information
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `flake8`
+## CI/CD pipeline
 
-#### Tests unitaires
+The CI/CD pipeline is a series of steps to make the application available for the users.
+In this case the CI/CD pipeline uses CircleCI.
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- `source venv/bin/activate`
-- `pytest`
+The pipeline starts when a change is made on the Git repository.
 
-#### Base de données
+The pipeline:
 
-- `cd /path/to/Python-OC-Lettings-FR`
-- Ouvrir une session shell `sqlite3`
-- Se connecter à la base de données `.open oc-lettings-site.sqlite3`
-- Afficher les tables dans la base de données `.tables`
-- Afficher les colonnes dans le tableau des profils, `pragma table_info(Python-OC-Lettings-FR_profile);`
-- Lancer une requête sur la table des profils, `select user_id, favorite_city from
-  Python-OC-Lettings-FR_profile where favorite_city like 'B%';`
-- `.quit` pour quitter
+  - **Build** The application is compiled, using environment variables stored in CircleCI environment variables (SENTRY_DSN, SECRET_KEY, DOCKERHUB_API, DOCKERHUB_REPO, DOCKERHUB_USERNAME, HEROKU_TOKEN, HEROKU_APPNAME).
 
-#### Panel d'administration
+  - **Lint** The codebase is checked using flake8.
 
-- Aller sur `http://localhost:8000/admin`
-- Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
+  - **Test** Using pytest, tests check functions results, behaviour and templates used.
 
-### Windows
+  - **Coverage** The coverage stage checks for code coverage, aiming for at least 84% of the codebase tested.
 
-Utilisation de PowerShell, comme ci-dessus sauf :
+  - **Push** This stage build the Docker image and pushes it to Dockerhub, only its master branch, if the previous stages (Build, Test, Coverage) went successfully.
 
-- Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
-- Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+  - **Deploy** The last stage, where the application is deployed to Heroku, only its master branch, if the previous stages (Build, Test, Coverage) went successfully.
+
+The pipeline allows for a safer delivery of the application, using automated testing and deployment.
+
+## Documentation
+
+For more details about the codebase and procedures, see the documentation [here](https://oc-lettings-fr.readthedocs.io/en/latest/)
