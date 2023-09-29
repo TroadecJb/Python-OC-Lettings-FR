@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    ports:
+      - "8000:8000"
+    image: troadecjb/jbt-oc-lettings:latest
+    environment:
+      - SENTRY_DSN=${SENTRY_DSN}
+      - SECRET_KEY=${SECRET_KEY}
