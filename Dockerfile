@@ -6,7 +6,8 @@ WORKDIR /code
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
-# ENV PYTHONUNBUFFERED 1
+ENV SENTRY_DSN=$SENTRY_DSN
+ENV SECRET_KEY=$SECRET_KEY
 
 # install dependencies
 COPY ./requirements.txt /code
